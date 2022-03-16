@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TesteVolvo.Models.Caminhao>
+
+@{
+    ViewData["Title"] = "Listagem de Caminhões";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Caminhões</h1>
+    
+    <p>
+    <a class="btn btn-primary " asp-action="Adicionar">Novo Caminhão</a>
+    <br />
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoFabricacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoModelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnoFabricacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnoModelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo.Nome)
+            </td>
+            <td>
+                <a class="btn btn-default btn-xs" asp-action="Editar" asp-route-idCaminhao="@item.IdCaminhao">Editar</a> |
+                @*<a class="btn btn-danger btn-xs" asp-action="Excluir" asp-route-idCaminhao="@item.IdCaminhao">Excluir</a>*@
+                <form asp-controller="Caminhao" asp-action="Excluir">
+                    <input type="hidden" name="idCaminhao" value="@item.IdCaminhao" />
+                    <input type="submit" class="btn btn-danger btn-xs" value="Excluir" />
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
